@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS "sites" (
 	"district" TEXT,	
 	"lat" REAL,
 	"long" REAL,
-    "waterBoard", TEXT,
+    "waterBoard" TEXT,
 	PRIMARY KEY("id" )
 );
 

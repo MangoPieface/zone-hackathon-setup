@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./pollution-data.db"
+}
+
+model incidents {
+  id               Int     @id @default(autoincrement())
+  siteLocationId   String?
+  siteLocationName String?
+  predictedAt      String?
+  publishedAt      String?
+  expiresAt        String?
+  warningMessage   String?
+  riskLevel        String?
+  sites            sites?  @relation(fields: [siteLocationId], references: [id], onDelete: NoAction, onUpdate: NoAction) @ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model sites {
+  id               String?     @id
+  siteLocationName String?
+  district         String?
+  lat              Float?
+  long             Float?
+  waterBoard       String?
+  incidents        incidents[]
+
+  @@ignore
+}
